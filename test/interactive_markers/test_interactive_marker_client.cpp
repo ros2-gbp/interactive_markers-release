@@ -58,7 +58,23 @@ TEST(TestInteractiveMarkerClientInitialize, construction_destruction)
   }
   {
     interactive_markers::InteractiveMarkerClient client(
-      node, buffer, "test_frame_id", "test_namespace", std::chrono::seconds(3));
+      node,
+      buffer,
+      "test_frame_id",
+      "test_namespace",
+      std::chrono::seconds(3),
+      rclcpp::QoS(1),
+      rclcpp::QoS(100));
+  }
+  {
+    interactive_markers::InteractiveMarkerClient client(
+      node->get_node_base_interface(),
+      node->get_node_topics_interface(),
+      node->get_node_services_interface(),
+      node->get_node_graph_interface(),
+      node->get_node_clock_interface(),
+      node->get_node_logging_interface(),
+      buffer);
   }
   {
     interactive_markers::InteractiveMarkerClient client(
@@ -71,7 +87,9 @@ TEST(TestInteractiveMarkerClientInitialize, construction_destruction)
       buffer,
       "test_frame_id",
       "test_namespace",
-      std::chrono::milliseconds(100));
+      std::chrono::milliseconds(100),
+      rclcpp::QoS(42),
+      rclcpp::QoS(1));
   }
   {
     // Invalid namespace (shouldn't crash)
@@ -125,6 +143,26 @@ protected:
       transform_stamped.child_frame_id = markers[0].header.frame_id;
       ASSERT_TRUE(buffer_->setTransform(transform_stamped, "mock_tf_authority"));
     }
+  }
+
+  /// Wait for client and server to discover each other or die trying
+  void waitForDiscovery(
+    std::shared_ptr<MockInteractiveMarkerServer> server,
+    std::chrono::seconds timeout = std::chrono::seconds(3))
+  {
+    const auto start_time = std::chrono::system_clock::now();
+    while (
+      (server->publisher_->get_subscription_count() == 0u ||
+      server->subscription_->get_publisher_count() == 0u) &&
+      (std::chrono::system_clock::now() - start_time) < timeout)
+    {
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+
+    ASSERT_GT(server->publisher_->get_subscription_count(), 0u);
+    ASSERT_GT(server->subscription_->get_publisher_count(), 0u);
+    // TODO(jacobperron): We should probably also wait for the client to discover the server
+    //                    to avoid flakes. This requires additional interactive marker client API.
   }
 
   std::string target_frame_id_;
@@ -211,6 +249,7 @@ TEST_F(TestInteractiveMarkerClient, states)
     // Start server
     auto mock_server = std::make_shared<MockInteractiveMarkerServer>(topic_namespace_);
     executor_->add_node(mock_server);
+    waitForDiscovery(mock_server);
     // Repeatedly call the client's update method until the server is detected
     auto update_func = std::bind(
       &interactive_markers::InteractiveMarkerClient::update, client_.get());
@@ -271,6 +310,7 @@ TEST_F(TestInteractiveMarkerClient, update_callback)
   // First, we need to get into the RUNNING state
   auto mock_server = std::make_shared<MockInteractiveMarkerServer>(topic_namespace_);
   executor_->add_node(mock_server);
+  waitForDiscovery(mock_server);
   makeTfDataAvailable(mock_server->markers_);
   auto update_func = std::bind(
     &interactive_markers::InteractiveMarkerClient::update, client_.get());
@@ -326,6 +366,7 @@ TEST_F(TestInteractiveMarkerClient, feedback)
 
   auto mock_server = std::make_shared<MockInteractiveMarkerServer>(topic_namespace_);
   executor_->add_node(mock_server);
+  waitForDiscovery(mock_server);
 
   EXPECT_EQ(mock_server->feedback_received_, 0u);
 
