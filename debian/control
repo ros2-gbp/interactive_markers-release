@@ -1,0 +1,12 @@
+Source: ros-eloquent-interactive-markers
+Section: misc
+Priority: optional
+Maintainer: William Woodall <william@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), ros-eloquent-ament-cmake, ros-eloquent-ament-cmake-gtest, ros-eloquent-ament-cmake-python, ros-eloquent-ament-lint-auto, ros-eloquent-ament-lint-common, ros-eloquent-geometry-msgs, ros-eloquent-rclcpp, ros-eloquent-rmw, ros-eloquent-tf2, ros-eloquent-tf2-geometry-msgs, ros-eloquent-visualization-msgs, ros-eloquent-ros-workspace
+Homepage: http://ros.org/wiki/interactive_markers
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-interactive-markers
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-eloquent-builtin-interfaces, ros-eloquent-rclcpp, ros-eloquent-rclpy, ros-eloquent-rmw, ros-eloquent-std-msgs, ros-eloquent-tf2, ros-eloquent-tf2-geometry-msgs, ros-eloquent-visualization-msgs, ros-eloquent-ros-workspace
+Description: 3D interactive marker communication library for RViz and similar tools.
