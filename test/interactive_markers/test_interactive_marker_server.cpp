@@ -34,6 +34,7 @@
 #include <chrono>
 #include <memory>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "interactive_marker_fixtures.hpp"
@@ -54,12 +55,31 @@ TEST(TestInteractiveMarkerServer, construction_and_destruction)
   }
   {
     interactive_markers::InteractiveMarkerServer server(
+      "test_node_ptr_ctor_server", node, rclcpp::QoS(42));
+  }
+  {
+    interactive_markers::InteractiveMarkerServer server(
+      "test_node_ptr_ctor_server", node, rclcpp::QoS(1), rclcpp::QoS(99));
+  }
+  {
+    interactive_markers::InteractiveMarkerServer server(
       "test_node_interfaces_ctor_server",
       node->get_node_base_interface(),
       node->get_node_clock_interface(),
       node->get_node_logging_interface(),
       node->get_node_topics_interface(),
       node->get_node_services_interface());
+  }
+  {
+    interactive_markers::InteractiveMarkerServer server(
+      "test_node_interfaces_ctor_server",
+      node->get_node_base_interface(),
+      node->get_node_clock_interface(),
+      node->get_node_logging_interface(),
+      node->get_node_topics_interface(),
+      node->get_node_services_interface(),
+      rclcpp::QoS(1),
+      rclcpp::QoS(100));
   }
 
   rclcpp::shutdown();
@@ -122,6 +142,16 @@ protected:
 
     // Wait for discovery (or timeout)
     ASSERT_TRUE(mock_client_->client_->wait_for_service(std::chrono::seconds(3)));
+    const auto start_time = std::chrono::system_clock::now();
+    while (
+      mock_client_->publisher_->get_subscription_count() == 0u &&
+      (std::chrono::system_clock::now() - start_time) < std::chrono::seconds(3))
+    {
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+    ASSERT_EQ(mock_client_->publisher_->get_subscription_count(), 1u);
+    // TODO(jacobperron): We should probably also wait for the server to discover the client
+    //                    to avoid flakes. This requires additional interactive marker server API.
   }
 
   void TearDown()
