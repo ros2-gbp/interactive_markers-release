@@ -1,3 +1,26 @@
+## interactive_markers (foxy) - 2.1.0-1
+
+The packages in the `interactive_markers` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --rosdistro foxy --track foxy interactive_markers` on `Thu, 30 Apr 2020 20:31:05 -0000`
+
+The `interactive_markers` package was released.
+
+Version of package(s) in repository `interactive_markers`:
+
+- upstream repository: https://github.com/ros-visualization/interactive_markers.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `2.1.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.3`
+- catkin_pkg version: `0.4.16`
+- rosdep version: `0.19.0`
+- rosdistro version: `0.8.0`
+- vcstools version: `0.1.42`
+
+
 ## interactive_markers (eloquent) - 2.0.1-1
 
 The packages in the `interactive_markers` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release -r eloquent interactive_markers` on `Thu, 24 Oct 2019 03:54:41 -0000`
