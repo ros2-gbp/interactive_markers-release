@@ -2,6 +2,11 @@
 Changelog for package interactive_markers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.1.1 (2020-06-03)
+------------------
+* export targets in a addition to include directories / libraries (`#70 <https://github.com/ros-visualization/interactive_markers/issues/70>`_)
+* Contributors: Dirk Thomas
+
 2.1.0 (2020-04-30)
 ------------------
 * avoid new deprecations (`#69 <https://github.com/ros-visualization/interactive_markers/issues/69>`_)
