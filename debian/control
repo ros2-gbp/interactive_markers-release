@@ -1,0 +1,12 @@
+Source: ros-galactic-interactive-markers
+Section: misc
+Priority: optional
+Maintainer: Jacob Perron <jacob@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-galactic-ament-cmake, ros-galactic-ament-cmake-gtest, ros-galactic-ament-cmake-python, ros-galactic-ament-lint-auto, ros-galactic-ament-lint-common, ros-galactic-geometry-msgs, ros-galactic-rclcpp, ros-galactic-rmw, ros-galactic-tf2, ros-galactic-tf2-geometry-msgs, ros-galactic-visualization-msgs, ros-galactic-ros-workspace
+Homepage: http://ros.org/wiki/interactive_markers
+Standards-Version: 3.9.2
+
+Package: ros-galactic-interactive-markers
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-galactic-builtin-interfaces, ros-galactic-rclcpp, ros-galactic-rclpy, ros-galactic-rmw, ros-galactic-std-msgs, ros-galactic-tf2, ros-galactic-tf2-geometry-msgs, ros-galactic-visualization-msgs, ros-galactic-ros-workspace
+Description: 3D interactive marker communication library for RViz and similar tools.
