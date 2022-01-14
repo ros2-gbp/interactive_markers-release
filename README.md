@@ -1,3 +1,26 @@
+## interactive_markers (rolling) - 2.3.1-1
+
+The packages in the `interactive_markers` repository were released into the `rolling` distro by running `/usr/bin/bloom-release -r rolling interactive_markers` on `Fri, 14 Jan 2022 17:32:44 -0000`
+
+The `interactive_markers` package was released.
+
+Version of package(s) in repository `interactive_markers`:
+
+- upstream repository: https://github.com/ros-visualization/interactive_markers.git
+- release repository: https://github.com/ros2-gbp/interactive_markers-release.git
+- rosdistro version: `2.3.0-1`
+- old version: `2.3.0-1`
+- new version: `2.3.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.24`
+- rosdep version: `0.21.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## interactive_markers (rolling) - 2.3.0-1
 
 The packages in the `interactive_markers` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --track rolling --rosdistro rolling interactive_markers` on `Mon, 18 Oct 2021 22:33:58 -0000`
