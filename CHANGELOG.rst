@@ -2,6 +2,9 @@
 Changelog for package interactive_markers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.5.0 (2023-04-28)
+------------------
+
 2.4.0 (2023-02-14)
 ------------------
 * Update interactive_markers to C++17. (`#99 <https://github.com/ros-visualization/interactive_markers/issues/99>`_)
