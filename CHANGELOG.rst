@@ -2,25 +2,11 @@
 Changelog for package interactive_markers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.7.1 (2025-10-07)
+2.5.5 (2025-10-07)
 ------------------
-* Explicit Time comparissons (`#105 <https://github.com/ros-visualization/interactive_markers/issues/105>`_) (`#115 <https://github.com/ros-visualization/interactive_markers/issues/115>`_)
-* fix cmake deprecation (`#113 <https://github.com/ros-visualization/interactive_markers/issues/113>`_) (`#114 <https://github.com/ros-visualization/interactive_markers/issues/114>`_)
+* Explicit Time comparissons (`#105 <https://github.com/ros-visualization/interactive_markers/issues/105>`_) (`#116 <https://github.com/ros-visualization/interactive_markers/issues/116>`_)
+* Remove CODEOWNERS and mirror-rolling-to-main workflow (`#110 <https://github.com/ros-visualization/interactive_markers/issues/110>`_) (`#111 <https://github.com/ros-visualization/interactive_markers/issues/111>`_)
 * Contributors: mergify[bot]
-
-2.7.0 (2024-12-20)
-------------------
-* Deprecating tf2 C Headers (`#109 <https://github.com/ros-visualization/interactive_markers/issues/109>`_)
-* Remove CODEOWNERS and mirror-rolling-to-main workflow (`#110 <https://github.com/ros-visualization/interactive_markers/issues/110>`_)
-* Contributors: Alejandro Hernández Cordero, Lucas Wendland
-
-2.6.1 (2024-07-08)
-------------------
-* Use non deprecated API (`#108 <https://github.com/ros-visualization/interactive_markers/issues/108>`_)
-* Contributors: Alejandro Hernández Cordero
-
-2.6.0 (2024-04-26)
-------------------
 
 2.5.4 (2024-03-28)
 ------------------
