@@ -2,14 +2,11 @@
 Changelog for package interactive_markers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.8.1 (2025-10-07)
+2.7.1 (2025-10-07)
 ------------------
-* Explicit Time comparissons (`#105 <https://github.com/ros-visualization/interactive_markers/issues/105>`_)
-* fix cmake deprecation (`#113 <https://github.com/ros-visualization/interactive_markers/issues/113>`_)
-* Contributors: AiVerisimilitude, mosfet80
-
-2.8.0 (2025-04-28)
-------------------
+* Explicit Time comparissons (`#105 <https://github.com/ros-visualization/interactive_markers/issues/105>`_) (`#115 <https://github.com/ros-visualization/interactive_markers/issues/115>`_)
+* fix cmake deprecation (`#113 <https://github.com/ros-visualization/interactive_markers/issues/113>`_) (`#114 <https://github.com/ros-visualization/interactive_markers/issues/114>`_)
+* Contributors: mergify[bot]
 
 2.7.0 (2024-12-20)
 ------------------
