@@ -1,3 +1,26 @@
+## interactive_markers (kilted) - 2.7.1-1
+
+The packages in the `interactive_markers` repository were released into the `kilted` distro by running `/usr/bin/bloom-release --rosdistro kilted --track kilted interactive_markers` on `Tue, 07 Oct 2025 09:22:15 -0000`
+
+The `interactive_markers` package was released.
+
+Version of package(s) in repository `interactive_markers`:
+
+- upstream repository: https://github.com/ros-visualization/interactive_markers.git
+- release repository: https://github.com/ros2-gbp/interactive_markers-release.git
+- rosdistro version: `2.7.0-2`
+- old version: `2.7.0-2`
+- new version: `2.7.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.13.0`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## interactive_markers (rolling) - 2.8.1-1
 
 The packages in the `interactive_markers` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling interactive_markers` on `Tue, 07 Oct 2025 09:17:48 -0000`
