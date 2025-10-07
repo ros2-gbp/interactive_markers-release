@@ -2,6 +2,43 @@
 Changelog for package interactive_markers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.6.1 (2024-07-08)
+------------------
+* Use non deprecated API (`#108 <https://github.com/ros-visualization/interactive_markers/issues/108>`_)
+* Contributors: Alejandro Hernández Cordero
+
+2.6.0 (2024-04-26)
+------------------
+
+2.5.4 (2024-03-28)
+------------------
+* Shorten the length of a lambda. (`#106 <https://github.com/ros-visualization/interactive_markers/issues/106>`_)
+* Contributors: Chris Lalancette
+
+2.5.3 (2023-12-26)
+------------------
+
+2.5.2 (2023-10-04)
+------------------
+* Fixed C++20 warning that ‘++’ expression of ‘volatile’-qualified type is deprecated (`#102 <https://github.com/ros-visualization/interactive_markers/issues/102>`_)
+* Contributors: AiVerisimilitude
+
+2.5.1 (2023-07-11)
+------------------
+* Cleanup of interactive markers (`#101 <https://github.com/ros-visualization/interactive_markers/issues/101>`_)
+* Contributors: Chris Lalancette
+
+2.5.0 (2023-04-28)
+------------------
+
+2.4.0 (2023-02-14)
+------------------
+* Update interactive_markers to C++17. (`#99 <https://github.com/ros-visualization/interactive_markers/issues/99>`_)
+* Update maintainers (`#98 <https://github.com/ros-visualization/interactive_markers/issues/98>`_)
+* Mirror rolling to ros2
+* update maintainer (`#92 <https://github.com/ros-visualization/interactive_markers/issues/92>`_)
+* Contributors: Audrow Nash, Chris Lalancette, Dharini Dutia
+
 2.3.2 (2022-04-08)
 ------------------
 * Do not publish if context is invalid during shutdown (`#89 <https://github.com/ros-visualization/interactive_markers/issues/89>`_)
