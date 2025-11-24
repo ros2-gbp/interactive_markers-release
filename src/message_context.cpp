@@ -40,8 +40,8 @@
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "geometry_msgs/msg/transform_stamped.hpp"
 #include "rcutils/logging_macros.h"
-#include "tf2/buffer_core_interface.h"
-#include "tf2/time.h"
+#include "tf2/buffer_core_interface.hpp"
+#include "tf2/time.hpp"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 #include "rclcpp/time.hpp"
 #include "std_msgs/msg/header.hpp"
@@ -100,7 +100,7 @@ bool MessageContext<MsgT>::getTransform(
         header.frame_id.c_str(), target_frame_.c_str(), rclcpp::Time(header.stamp).seconds());
 
       // if timestamp is given, transform message into target frame
-      if (header.stamp != rclcpp::Time(0)) {
+      if (header.stamp != builtin_interfaces::msg::Time()) {
         geometry_msgs::msg::PoseStamped pose_stamped_msg;
         pose_stamped_msg.header = header;
         pose_stamped_msg.pose = pose_msg;
@@ -117,9 +117,10 @@ bool MessageContext<MsgT>::getTransform(
     geometry_msgs::msg::TransformStamped transform =
       tf_buffer_core_->lookupTransform(
       target_frame_, header.frame_id, tf2::TimePoint());
-    rclcpp::Time latest_time = transform.header.stamp;
+    rclcpp::Time latest_time(transform.header.stamp, RCL_ROS_TIME);
+    rclcpp::Time source_time(header.stamp, RCL_ROS_TIME);
 
-    if (latest_time != rclcpp::Time(0) && latest_time > header.stamp) {
+    if (latest_time != rclcpp::Time(0) && latest_time > source_time) {
       std::ostringstream oss;
       oss << "The message contains an old timestamp and cannot be transformed " <<
         "('" << header.frame_id << "' to '" << target_frame_ << "' at time " <<
