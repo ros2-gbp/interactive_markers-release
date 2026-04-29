@@ -1,0 +1,12 @@
+Source: ros-lyrical-interactive-markers
+Section: misc
+Priority: optional
+Maintainer: Dharini Dutia <dharini@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake, ros-lyrical-ament-cmake-gtest <!nocheck>, ros-lyrical-ament-cmake-python, ros-lyrical-ament-lint-auto <!nocheck>, ros-lyrical-ament-lint-common <!nocheck>, ros-lyrical-builtin-interfaces <!nocheck>, ros-lyrical-geometry-msgs, ros-lyrical-rclcpp, ros-lyrical-rcutils, ros-lyrical-rmw, ros-lyrical-std-msgs, ros-lyrical-tf2, ros-lyrical-tf2-geometry-msgs, ros-lyrical-visualization-msgs, ros-lyrical-ros-workspace
+Homepage: http://ros.org/wiki/interactive_markers
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-interactive-markers
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-builtin-interfaces, ros-lyrical-geometry-msgs, ros-lyrical-rclcpp, ros-lyrical-rclpy, ros-lyrical-rcutils, ros-lyrical-rmw, ros-lyrical-std-msgs, ros-lyrical-tf2, ros-lyrical-tf2-geometry-msgs, ros-lyrical-visualization-msgs, ros-lyrical-ros-workspace
+Description: 3D interactive marker communication library for RViz and similar tools.
