@@ -1,3 +1,26 @@
+## interactive_markers (rolling) - 2.9.0-1
+
+The packages in the `interactive_markers` repository were released into the `rolling` distro by running `/usr/local/google/home/sloretz/projects/lyrical/env3/bin/bloom-release -r rolling -t rolling interactive_markers` on `Thu, 07 May 2026 18:06:08 -0000`
+
+The `interactive_markers` package was released.
+
+Version of package(s) in repository `interactive_markers`:
+
+- upstream repository: https://github.com/ros-visualization/interactive_markers.git
+- release repository: https://github.com/ros2-gbp/interactive_markers-release.git
+- rosdistro version: `2.8.3-3`
+- old version: `2.8.3-3`
+- new version: `2.9.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.14.3`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## interactive_markers (lyrical) - 2.8.4-1
 
 The packages in the `interactive_markers` repository were released into the `lyrical` distro by running `/usr/local/google/home/sloretz/projects/lyrical/env3/bin/bloom-release interactive_markers -r lyrical -t lyrical` on `Thu, 30 Apr 2026 15:55:26 -0000`
