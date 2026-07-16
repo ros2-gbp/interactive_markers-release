@@ -49,6 +49,7 @@
 #include "visualization_msgs/srv/get_interactive_markers.hpp"
 
 #include "interactive_markers/message_context.hpp"
+#include "interactive_markers/node_interfaces.hpp"
 #include "interactive_markers/visibility_control.hpp"
 
 namespace interactive_markers
@@ -88,12 +89,12 @@ public:
     STATE_RUNNING
   };
 
-  typedef std::function<void (visualization_msgs::msg::InteractiveMarkerUpdate::SharedPtr)>
-    UpdateCallback;
-  typedef std::function<void (visualization_msgs::srv::GetInteractiveMarkers::Response::SharedPtr)>
-    InitializeCallback;
-  typedef std::function<void ()> ResetCallback;
-  typedef std::function<void (const Status, const std::string &)> StatusCallback;
+  using UpdateCallback =
+    std::function<void (visualization_msgs::msg::InteractiveMarkerUpdate::SharedPtr)>;
+  using InitializeCallback =
+    std::function<void (visualization_msgs::srv::GetInteractiveMarkers::Response::SharedPtr)>;
+  using ResetCallback = std::function<void ()>;
+  using StatusCallback = std::function<void (const Status, const std::string &)>;
 
   /// Constructor.
   /**
@@ -163,7 +164,7 @@ public:
    * \param update_sub_qos QoS settings for the underlying update subscription.
    * \param feedback_pub_qos QoS settings for the underlying feedback publisher.
    */
-  template<typename NodePtr, class Rep = int64_t, class Period = std::ratio<1>>
+  template<ClientNodeInterfaces NodePtr, class Rep = int64_t, class Period = std::ratio<1>>
   InteractiveMarkerClient(
     NodePtr node,
     std::shared_ptr<tf2::BufferCoreInterface> tf_buffer_core,
@@ -261,9 +262,9 @@ public:
   }
 
 private:
-  typedef MessageContext<visualization_msgs::srv::GetInteractiveMarkers::Response>
-    InitialMessageContext;
-  typedef MessageContext<visualization_msgs::msg::InteractiveMarkerUpdate> UpdateMessageContext;
+  using InitialMessageContext =
+    MessageContext<visualization_msgs::srv::GetInteractiveMarkers::Response>;
+  using UpdateMessageContext = MessageContext<visualization_msgs::msg::InteractiveMarkerUpdate>;
 
   // Disable copying
   InteractiveMarkerClient(const InteractiveMarkerClient &) = delete;

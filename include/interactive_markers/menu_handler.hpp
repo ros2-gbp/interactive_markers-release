@@ -33,6 +33,7 @@
 
 #include <functional>
 #include <set>
+#include <span>  // NOLINT(build/include_order): cpplint misclassifies the C++20 header as C
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -51,10 +52,10 @@ namespace interactive_markers
 class MenuHandler
 {
 public:
-  typedef uint32_t EntryHandle;
+  using EntryHandle = uint32_t;
 
-  typedef visualization_msgs::msg::InteractiveMarkerFeedback::ConstSharedPtr FeedbackConstPtr;
-  typedef std::function<void (const FeedbackConstPtr &)> FeedbackCallback;
+  using FeedbackConstPtr = visualization_msgs::msg::InteractiveMarkerFeedback::ConstSharedPtr;
+  using FeedbackCallback = std::function<void (const FeedbackConstPtr &)>;
 
   enum CheckState
   {
@@ -137,7 +138,7 @@ private:
   // entries_out.  Calls itself recursively to add the entire menu
   // tree.
   bool pushMenuEntries(
-    std::vector<EntryHandle> & handles_in,
+    std::span<const EntryHandle> handles_in,
     std::vector<visualization_msgs::msg::MenuEntry> & entries_out,
     EntryHandle parent_handle);
 
