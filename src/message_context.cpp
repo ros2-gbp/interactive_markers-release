@@ -28,11 +28,11 @@
 
 // Author: David Gossow
 
-#include <inttypes.h>
-
+#include <cinttypes>
+#include <format>  // NOLINT(build/include_order): cpplint misclassifies the C++20 header as C
 #include <list>
 #include <memory>
-#include <sstream>
+#include <span>  // NOLINT(build/include_order): cpplint misclassifies the C++20 header as C
 #include <string>
 #include <vector>
 
@@ -76,16 +76,6 @@ MessageContext<MsgT>::MessageContext(
 }
 
 template<class MsgT>
-MessageContext<MsgT> & MessageContext<MsgT>::operator=(const MessageContext<MsgT> & other)
-{
-  open_marker_idx_ = other.open_marker_idx_;
-  open_pose_idx_ = other.open_pose_idx_;
-  target_frame_ = other.target_frame_;
-  enable_autocomplete_transparency_ = other.enable_autocomplete_transparency_;
-  return *this;
-}
-
-template<class MsgT>
 bool MessageContext<MsgT>::getTransform(
   std_msgs::msg::Header & header,
   geometry_msgs::msg::Pose & pose_msg)
@@ -121,11 +111,11 @@ bool MessageContext<MsgT>::getTransform(
     rclcpp::Time source_time(header.stamp, RCL_ROS_TIME);
 
     if (latest_time != rclcpp::Time(0) && latest_time > source_time) {
-      std::ostringstream oss;
-      oss << "The message contains an old timestamp and cannot be transformed " <<
-        "('" << header.frame_id << "' to '" << target_frame_ << "' at time " <<
-        rclcpp::Time(header.stamp).seconds() << ").";
-      throw exceptions::TransformError(oss.str());
+      throw exceptions::TransformError(
+        std::format(
+          "The message contains an old timestamp and cannot be transformed "
+          "('{}' to '{}' at time {}).",
+          header.frame_id, target_frame_, rclcpp::Time(header.stamp).seconds()));
     }
     return false;
   } catch (const tf2::TransformException & e) {
@@ -136,10 +126,9 @@ bool MessageContext<MsgT>::getTransform(
 
 template<class MsgT>
 void MessageContext<MsgT>::getTfTransforms(
-  std::vector<visualization_msgs::msg::InteractiveMarker> & msg_vec, std::list<size_t> & indices)
+  std::span<visualization_msgs::msg::InteractiveMarker> msg_vec, std::list<size_t> & indices)
 {
-  std::list<size_t>::iterator idx_it;
-  for (idx_it = indices.begin(); idx_it != indices.end(); ) {
+  for (auto idx_it = indices.begin(); idx_it != indices.end(); ) {
     visualization_msgs::msg::InteractiveMarker & im_msg = msg_vec[*idx_it];
     // transform interactive marker
     bool success = getTransform(im_msg.header, im_msg.pose);
@@ -168,11 +157,10 @@ void MessageContext<MsgT>::getTfTransforms(
 
 template<class MsgT>
 void MessageContext<MsgT>::getTfTransforms(
-  std::vector<visualization_msgs::msg::InteractiveMarkerPose> & msg_vec,
+  std::span<visualization_msgs::msg::InteractiveMarkerPose> msg_vec,
   std::list<size_t> & indices)
 {
-  std::list<size_t>::iterator idx_it;
-  for (idx_it = indices.begin(); idx_it != indices.end(); ) {
+  for (auto idx_it = indices.begin(); idx_it != indices.end(); ) {
     visualization_msgs::msg::InteractiveMarkerPose & msg = msg_vec[*idx_it];
     if (getTransform(msg.header, msg.pose)) {
       idx_it = indices.erase(idx_it);

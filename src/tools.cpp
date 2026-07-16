@@ -33,9 +33,11 @@
 #endif
 #endif
 
+#include <algorithm>
+#include <atomic>
 #include <cmath>
+#include <format>  // NOLINT(build/include_order): cpplint misclassifies the C++20 header as C
 #include <set>
-#include <sstream>
 #include <string>
 #include <vector>
 
@@ -99,10 +101,8 @@ void uniqueifyControlNames(visualization_msgs::msg::InteractiveMarker & msg)
   std::set<std::string> names;
   for (size_t c = 0; c < msg.controls.size(); c++) {
     std::string name = msg.controls[c].name;
-    while (names.find(name) != names.end()) {
-      std::stringstream ss;
-      ss << name << "_u" << uniqueification_number++;
-      name = ss.str();
+    while (names.contains(name)) {
+      name = std::format("{}_u{}", name, uniqueification_number++);
     }
     msg.controls[c].name = name;
     names.insert(name);
@@ -190,8 +190,8 @@ void autoComplete(
     marker.pose.orientation.z = marker_orientation.z();
     marker.pose.orientation.w = marker_orientation.w();
 
-    static unsigned id = 0;
-    marker.id = id++;
+    static std::atomic<unsigned> id{0};
+    marker.id = id.fetch_add(1, std::memory_order_relaxed);
     marker.ns = msg.name;
 
     // If transparency is disabled, set alpha to 1.0 for all semi-transparent markers
@@ -218,7 +218,7 @@ void makeArrow(
 
   assignDefaultColor(marker, control.orientation);
 
-  float dist = fabs(pos);
+  float dist = std::abs(pos);
   float dir = pos > 0.0f ? 1.0f : -1.0f;
 
   float inner = 0.5f * dist;
@@ -409,14 +409,11 @@ void assignDefaultColor(
   tf2::Quaternion bt_quat(quat.x, quat.y, quat.z, quat.w);
   tf2::Vector3 bt_x_axis = tf2::Matrix3x3(bt_quat) * tf2::Vector3(1, 0, 0);
 
-  float x, y, z;
-  x = static_cast<float>(fabs(bt_x_axis.x()));
-  y = static_cast<float>(fabs(bt_x_axis.y()));
-  z = static_cast<float>(fabs(bt_x_axis.z()));
+  const float x = static_cast<float>(std::abs(bt_x_axis.x()));
+  const float y = static_cast<float>(std::abs(bt_x_axis.y()));
+  const float z = static_cast<float>(std::abs(bt_x_axis.z()));
 
-  float max_xy = x > y ? x : y;
-  float max_yz = y > z ? y : z;
-  float max_xyz = max_xy > max_yz ? max_xy : max_yz;
+  const float max_xyz = std::max({x, y, z});
 
   marker.color.r = x / max_xyz;
   marker.color.g = y / max_xyz;
